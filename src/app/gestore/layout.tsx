@@ -24,7 +24,10 @@ export default async function GestoreLayout({ children }: { children: React.Reac
   if (!staffRecord) {
     const { data: demoMarina } = await supabase.from("marinas").select("id, name").ilike("name", "%Cervo%").limit(1).single();
     if (demoMarina) {
-      await supabase.from("marina_staff").insert({ marina_id: demoMarina.id, user_id: user.id });
+      // 1. Assicura che l'utente esista in public.users per non violare la foreign key
+      await supabase.from("users").upsert({ id: user.id, full_name: user.email || 'Admin', role: 'MARINA_MANAGER' });
+      // 2. Associa il porto
+      await supabase.from("marina_staff").upsert({ marina_id: demoMarina.id, user_id: user.id });
       staffRecord = { marina_id: demoMarina.id, marinas: { name: demoMarina.name } } as any;
     }
   }

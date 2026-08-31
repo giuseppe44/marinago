@@ -11,13 +11,22 @@ export default async function GestoreOrmeggiPage() {
   if (!user) redirect("/login");
 
   // Recupera l'ID del marina associato a questo gestore
-  const { data: staffRecord } = await supabase
+  let { data: staffRecord } = await supabase
     .from("marina_staff")
     .select("marina_id")
     .eq("user_id", user.id)
     .single();
 
-  if (!staffRecord) return null; // Gestito nel layout
+  if (!staffRecord) {
+    const { data: demoMarina } = await supabase.from("marinas").select("id").ilike("name", "%Cervo%").limit(1).single();
+    if (demoMarina) {
+      staffRecord = { marina_id: demoMarina.id } as any;
+    } else {
+      return null;
+    }
+  }
+
+  if (!staffRecord) return null; // Type guard for TypeScript
 
   // Recupera i pontili
   const { data: piers } = await supabase

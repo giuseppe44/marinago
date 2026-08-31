@@ -7,13 +7,22 @@ export default async function GestoreDashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  const { data: staffRecord } = await supabase
+  let { data: staffRecord } = await supabase
     .from("marina_staff")
     .select("marina_id, marinas(name, city)")
     .eq("user_id", user?.id)
     .single();
 
-  if (!staffRecord) return null;
+  if (!staffRecord) {
+    const { data: demoMarina } = await supabase.from("marinas").select("id, name, city").ilike("name", "%Cervo%").limit(1).single();
+    if (demoMarina) {
+      staffRecord = { marina_id: demoMarina.id, marinas: { name: demoMarina.name, city: demoMarina.city } } as any;
+    } else {
+      return null;
+    }
+  }
+
+  if (!staffRecord) return null; // Type guard for TypeScript
 
   // Statistiche veloci
   const { count: berthsCount } = await supabase
