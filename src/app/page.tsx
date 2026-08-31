@@ -7,12 +7,6 @@ export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   
-  // Test di connessione (sola lettura)
-  const { data: marinas, error } = await supabase.from("marinas").select("id").limit(1);
-  const dbStatus = error 
-    ? { status: "error", message: error.message }
-    : { status: "success", count: marinas?.length || 0 };
-
   // Recupero barche dell'utente o barche DEMO
   let userBoats: any[] = [];
   if (user) {
@@ -28,21 +22,22 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
-      {/* DB Connection Status Bar */}
-      <div className={`text-xs text-center py-1 text-white ${dbStatus.status === 'success' ? 'bg-emerald-600' : 'bg-red-600'}`}>
-        {dbStatus.status === 'success' 
-          ? `✓ Database connesso (Supabase OK)` 
-          : `⚠ Errore connessione DB: ${dbStatus.message}`}
-      </div>
-
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] w-full bg-slate-900 flex items-center justify-center">
-        {/* Placeholder per l'immagine di sfondo (mare Sardegna) */}
+      <section className="relative h-[65vh] min-h-[550px] w-full bg-slate-900 flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-slate-900/60 z-0" />
         <div 
           className="absolute inset-0 z-0 opacity-70 bg-cover bg-center"
           style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1569263979104-865ab7cdf0d5?q=80&w=2070&auto=format&fit=crop")' }}
         />
+        
+        {/* Dynamic LIVE element */}
+        <div className="relative z-10 mb-8 inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          </span>
+          <span className="text-white text-sm font-medium tracking-wide">12 ormeggi confermati oggi</span>
+        </div>
         
         <div className="relative z-10 text-center px-4 w-full">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg tracking-tight">
