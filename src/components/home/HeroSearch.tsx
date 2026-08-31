@@ -66,11 +66,11 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
                 <label className="block text-sm font-bold text-slate-900 mb-2">Dove vuoi andare?</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input list="marinas-list" type="text" name="destination" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="marinas-list" type="text" name="destination" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
                   <datalist id="marinas-list">
                     <option value="Porto Cervo" />
                     <option value="Cagliari" />
-                    <option value="Villasimius" />
+                    <option value="Porto Rotondo" />
                     <option value="Olbia" />
                   </datalist>
                 </div>
@@ -81,14 +81,14 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
                   <label className="block text-sm font-bold text-slate-900 mb-2">Arrivo</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                    <input type="date" name="start" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    <input type="date" name="start" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                   </div>
                 </div>
                 <div className="w-1/2">
                   <label className="block text-sm font-bold text-slate-900 mb-2">Partenza</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                    <input type="date" name="end" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    <input type="date" name="end" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                   </div>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
                 <label className="block text-sm font-bold text-slate-900 mb-2">La tua barca</label>
                 <div className="relative">
                   <Anchor className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <select name="boat" required className="w-full pl-10 pr-8 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+                  <select name="boat" required className="w-full pl-10 pr-8 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
                     <option value="">Seleziona imbarcazione...</option>
                     {boats.map(boat => (
                       <option key={boat.id} value={boat.id}>{boat.name} ({boat.length}m {boat.boat_type || ''})</option>
@@ -120,14 +120,14 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
                 <label className="block text-sm font-bold text-slate-900 mb-2">Consegna a bordo in porto</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input list="marinas-list" type="text" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="marinas-list" type="text" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
                 </div>
               </div>
               <div className="flex-1 w-full">
                 <label className="block text-sm font-bold text-slate-900 mb-2">Cosa ti serve?</label>
                 <div className="relative">
                   <ShoppingBasket className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input list="services-list" type="text" placeholder="Es. Vino, Pulizie, Meccanico..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="services-list" type="text" placeholder="Es. Vino, Pulizie, Meccanico..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
                   <datalist id="services-list">
                     <option value="Vino e Alcolici" />
                     <option value="Spesa Fresca (Carne/Pesce)" />

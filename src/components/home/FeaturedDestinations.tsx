@@ -5,18 +5,18 @@ export function FeaturedDestinations() {
   const destinations = [
     {
       name: "Porto Cervo",
-      image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1544325969-9836eb4407b3?q=80&w=2070&auto=format&fit=crop",
       desc: "Il cuore della Costa Smeralda, esclusivo e raffinato.",
     },
     {
       name: "Cagliari",
-      image: "https://images.unsplash.com/photo-1572970530739-1bc06079bdab?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2070&auto=format&fit=crop",
       desc: "Il capoluogo sardo, perfetto mix tra storia, movida e mare.",
     },
     {
-      name: "Villasimius",
-      image: "https://images.unsplash.com/photo-1533228876403-518fa10066ba?q=80&w=2070&auto=format&fit=crop",
-      desc: "Acque cristalline e spiagge mozzafiato nel sud est dell'isola.",
+      name: "Porto Rotondo",
+      image: "https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=2070&auto=format&fit=crop",
+      desc: "L'eleganza assoluta, tra yacht da sogno e acque turchesi.",
     },
   ];
 
