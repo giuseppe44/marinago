@@ -1,6 +1,7 @@
 import { searchAvailableBerths } from "@/lib/search/engine";
 import { Ship, MapPin, Calendar, Euro, Navigation, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
+import { MarinasMap } from "@/components/shared/Map";
 
 export default async function RicercaPage({
   searchParams,
@@ -99,9 +100,9 @@ export default async function RicercaPage({
                     <Link href={`/checkout?berth=${berth.id}&start=${start}&end=${end}&boat=${boat}`} className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center">
                       Prenota Ora
                     </Link>
-                    <button className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <Link href={`/cambusa`} className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2">
                       <ShoppingBasket className="h-4 w-4" /> Aggiungi Cambusa
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -122,15 +123,10 @@ export default async function RicercaPage({
           </div>
         </div>
 
-        {/* Mappa (Placeholder) */}
+        {/* Mappa Reale */}
         <div className="hidden lg:block lg:w-1/2 bg-slate-200 relative border-l border-slate-300">
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-8 text-center bg-[url('https://www.transparenttextures.com/patterns/cartographer.png')]">
-            <MapPin className="h-16 w-16 mb-4 text-slate-300" />
-            <h3 className="text-xl font-bold text-slate-500 mb-2">Mappa Interattiva</h3>
-            <p className="max-w-md">
-              Integrazione Google Maps / Mapbox in arrivo.<br/>
-              In questa sezione verranno mostrati i PIN dei porti con le disponibilità trovate, permettendo di esplorare le distanze tra le marine per pianificare gli itinerari.
-            </p>
+          <div className="absolute inset-0">
+             <MarinasMap markers={Array.from(new Map(results.filter(b => b.marinas.latitude && b.marinas.longitude).map(b => [b.marinas.id, { id: b.marinas.id, latitude: b.marinas.latitude, longitude: b.marinas.longitude, name: b.marinas.name }])).values())} />
           </div>
         </div>
 
