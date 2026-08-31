@@ -6,6 +6,12 @@ export async function Navbar() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
+  let profile = null;
+  if (user) {
+    const { data } = await supabase.from("users").select("role").eq("id", user.id).single();
+    profile = data;
+  }
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center px-4 justify-between">
@@ -27,9 +33,16 @@ export async function Navbar() {
 
         <div className="flex items-center gap-4">
           {user ? (
-            <Link href="/profilo/barche" className="hidden md:flex items-center gap-2 text-sm font-semibold text-blue-700 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors">
-              <User className="h-4 w-4" /> Il mio Profilo
-            </Link>
+            <>
+              {profile?.role === 'MARINA_MANAGER' || profile?.role === 'ADMIN' ? (
+                <Link href="/admin" className="hidden md:flex items-center gap-2 text-sm font-bold text-white bg-slate-900 px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+                  DASHBOARD ADMIN
+                </Link>
+              ) : null}
+              <Link href="/profilo/barche" className="hidden md:flex items-center gap-2 text-sm font-semibold text-blue-700 bg-blue-50 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors">
+                <User className="h-4 w-4" /> Il mio Profilo
+              </Link>
+            </>
           ) : (
             <Link href="/login" className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
               <User className="h-4 w-4" /> Accedi
