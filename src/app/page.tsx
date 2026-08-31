@@ -38,10 +38,10 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[500px] w-full bg-slate-900 flex items-center justify-center">
         {/* Placeholder per l'immagine di sfondo (mare Sardegna) */}
-        <div className="absolute inset-0 bg-blue-900/40 z-0" />
+        <div className="absolute inset-0 bg-slate-900/60 z-0" />
         <div 
-          className="absolute inset-0 z-0 opacity-60 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1533228876403-518fa10066ba?q=80&w=2070&auto=format&fit=crop")' }}
+          className="absolute inset-0 z-0 opacity-70 bg-cover bg-center"
+          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop")' }}
         />
         
         <div className="relative z-10 text-center px-4 w-full">

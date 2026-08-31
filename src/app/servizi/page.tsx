@@ -1,62 +1,57 @@
-import { ShoppingBasket, Sparkles, Wrench, Car, Utensils } from "lucide-react";
+import { ShoppingBag, Sparkles, Wrench, Car, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
 
 export default function ServiziPage() {
   const servizi = [
     {
-      title: "Cambusa Fresca",
-      desc: "Ricevi la spesa direttamente a bordo prima della partenza.",
-      icon: <ShoppingBasket className="h-10 w-10 text-emerald-600" />,
-      color: "bg-emerald-50",
+      title: "Cambusa Esclusiva",
+      desc: "Selezioni di vini pregiati e prodotti freschi locali, consegnati direttamente a bordo.",
+      icon: <ShoppingBag strokeWidth={1.5} className="h-10 w-10 text-slate-900" />,
     },
     {
-      title: "Pulizia Interni",
-      desc: "Servizio di pulizia e sanificazione professionale per la tua barca.",
-      icon: <Sparkles className="h-10 w-10 text-blue-600" />,
-      color: "bg-blue-50",
+      title: "Yacht Detailing",
+      desc: "Servizi di pulizia approfondita e sanificazione professionale per interni ed esterni.",
+      icon: <Sparkles strokeWidth={1.5} className="h-10 w-10 text-slate-900" />,
     },
     {
-      title: "Assistenza Tecnica",
-      desc: "Interventi rapidi da meccanici ed elettricisti certificati nei porti.",
-      icon: <Wrench className="h-10 w-10 text-orange-600" />,
-      color: "bg-orange-50",
+      title: "Assistenza Premium",
+      desc: "Meccanici ed elettricisti certificati disponibili h24 nei porti affiliati.",
+      icon: <Wrench strokeWidth={1.5} className="h-10 w-10 text-slate-900" />,
     },
     {
-      title: "Transfer Privati",
-      desc: "Spostamenti da e per aeroporti o hotel con auto NCC di lusso.",
-      icon: <Car className="h-10 w-10 text-purple-600" />,
-      color: "bg-purple-50",
+      title: "Transfer VIP",
+      desc: "Spostamenti da e per aeroporti con auto NCC di lusso e autista privato.",
+      icon: <Car strokeWidth={1.5} className="h-10 w-10 text-slate-900" />,
     },
     {
-      title: "Catering & Chef",
-      desc: "Chef a bordo e catering esclusivo per le tue cene in rada.",
-      icon: <Utensils className="h-10 w-10 text-rose-600" />,
-      color: "bg-rose-50",
+      title: "Chef a Bordo",
+      desc: "Esperienze culinarie su misura con chef privati per le tue cene in rada.",
+      icon: <UtensilsCrossed strokeWidth={1.5} className="h-10 w-10 text-slate-900" />,
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12">
+    <div className="min-h-screen bg-white py-16">
       <div className="container mx-auto px-4">
         
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">Servizi per la tua Barca</h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Il tuo concierge digitale in Sardegna. Seleziona il servizio di cui hai bisogno e te lo portiamo direttamente all'ormeggio.
+        <div className="mb-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Servizi Dedicati</h1>
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto font-light">
+            L'eccellenza del servizio concierge in Sardegna. Seleziona ciò di cui hai bisogno, ci occuperemo noi di ogni dettaglio all'ormeggio.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {servizi.map((srv, idx) => (
-            <Link key={idx} href="/cambusa" className="block bg-white rounded-xl shadow-sm border border-slate-200 p-8 hover:shadow-lg transition-all group">
-              <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 ${srv.color}`}>
+            <Link key={idx} href="/cambusa" className="flex flex-col items-center text-center bg-slate-50 rounded-2xl border border-slate-100 p-10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300">
                 {srv.icon}
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">{srv.title}</h3>
-              <p className="text-slate-600 mb-6">{srv.desc}</p>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">{srv.title}</h3>
+              <p className="text-slate-500 mb-8 font-light leading-relaxed">{srv.desc}</p>
               
-              <span className="inline-block text-blue-600 font-semibold group-hover:underline">
-                Prenota ora &rarr;
+              <span className="inline-block text-slate-900 font-medium tracking-wide uppercase text-sm group-hover:underline mt-auto">
+                Prenota ora
               </span>
             </Link>
           ))}

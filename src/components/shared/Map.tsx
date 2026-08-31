@@ -1,7 +1,7 @@
 "use client";
 
 import { Map, Marker } from "pigeon-maps";
-import { stamenTerrain } from "pigeon-maps/providers";
+import { useRouter } from "next/navigation";
 
 interface MapProps {
   markers: {
@@ -13,6 +13,8 @@ interface MapProps {
 }
 
 export function MarinasMap({ markers }: MapProps) {
+  const router = useRouter();
+
   // Center roughly on Sardinia
   return (
     <div className="w-full h-[500px] rounded-xl overflow-hidden shadow-lg border border-slate-200">
@@ -22,8 +24,12 @@ export function MarinasMap({ markers }: MapProps) {
             key={marker.id} 
             width={40}
             anchor={[marker.latitude, marker.longitude]} 
-            color="#2563eb"
-            onClick={() => alert(`Cliccato: ${marker.name}`)}
+            color="#0f172a" // Luxury dark slate instead of bright blue
+            onClick={() => {
+              // Extract city from name or just pass name
+              const searchName = marker.name.replace('[DEMO] Marina di ', '').replace('[DEMO] ', '');
+              router.push(`/ricerca?dest=${encodeURIComponent(searchName)}`);
+            }}
           />
         ))}
       </Map>
