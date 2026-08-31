@@ -6,12 +6,14 @@
 -- 1. Pulisce eventuali dati DEMO precedenti
 DELETE FROM public.marinas WHERE name LIKE '[DEMO]%';
 DELETE FROM public.vendors WHERE name LIKE '[DEMO]%';
+DELETE FROM public.boats WHERE name LIKE '[DEMO]%';
 
 -- 2. Inserimento Porti DEMO (restituisce gli ID per usarli dopo)
 WITH inserted_marinas AS (
   INSERT INTO public.marinas (name, latitude, longitude, city, is_verified, booking_mode, amenities)
   VALUES 
-    ('[DEMO] Marina di Porto Cervo', 41.1396, 9.5350, 'Arzachena', true, 'LIVE', '["WIFI", "ACQUA", "ELETTRICITA", "DOCCE"]'::jsonb),
+    ('[DEMO] Marina di Porto Cervo', 41.1396, 9.5350, 'Arzachena', true, 'LIVE', '["WIFI", "ACQUA", "ELETTRICITA", "DOCCE", "CARBURANTE"]'::jsonb),
+    ('[DEMO] Marina di Cagliari', 39.2115, 9.1129, 'Cagliari', true, 'LIVE', '["WIFI", "ACQUA", "ELETTRICITA", "RISTORANTI", "NEGOZI"]'::jsonb),
     ('[DEMO] Marina di Villasimius', 39.1177, 9.5085, 'Villasimius', true, 'LIVE', '["WIFI", "ACQUA", "ELETTRICITA", "CARBURANTE"]'::jsonb)
   RETURNING id, name
 ),
@@ -62,20 +64,22 @@ inserted_vendors AS (
   INSERT INTO public.vendors (name, vendor_type, city, is_verified)
   VALUES 
     ('[DEMO] Enoteca del Porto', 'WINE', 'Arzachena', true),
-    ('[DEMO] Macelleria Sarda', 'MEAT', 'Arzachena', true)
-  RETURNING id, name
+    ('[DEMO] Macelleria Sarda', 'MEAT', 'Arzachena', true),
+    ('[DEMO] Pulizie a Bordo Cagliari', 'SERVICES', 'Cagliari', true)
+  RETURNING id, name, city
 ),
 -- 6. Mappatura Fornitori ai Porti DEMO (Marina Vendors)
 inserted_marina_vendors AS (
   INSERT INTO public.marina_vendors (marina_id, vendor_id, delivery_fee, min_order_amount, lead_time_hours)
   SELECT 
     m.id, v.id, 
-    CASE WHEN v.name = '[DEMO] Enoteca del Porto' THEN 0 ELSE 15.00 END, -- 0€ enoteca, 15€ macelleria
-    CASE WHEN v.name = '[DEMO] Enoteca del Porto' THEN 50 ELSE 100 END,  -- minimo d'ordine
+    CASE WHEN v.name = '[DEMO] Enoteca del Porto' THEN 0 ELSE 15.00 END,
+    CASE WHEN v.name = '[DEMO] Enoteca del Porto' THEN 50 ELSE 100 END,
     24
   FROM inserted_marinas m
   CROSS JOIN inserted_vendors v
-  WHERE m.name = '[DEMO] Marina di Porto Cervo' -- Consegnano solo a Porto Cervo per test!
+  WHERE (m.name = '[DEMO] Marina di Porto Cervo' AND v.city = 'Arzachena')
+     OR (m.name = '[DEMO] Marina di Cagliari' AND v.city = 'Cagliari')
 )
 -- 7. Inserimento Prodotti DEMO
 INSERT INTO public.products (vendor_id, name, category, price, unit_of_measure, is_active)
@@ -89,5 +93,15 @@ JOIN (
     ('[DEMO] Enoteca del Porto', 'Cannonau Riserva', 'Bevande', 22.00, 'bottiglia'),
     ('[DEMO] Enoteca del Porto', 'Ghiaccio a cubetti', 'Generico', 4.00, 'confezione'),
     ('[DEMO] Macelleria Sarda', 'Costata di Manzo (Premium)', 'Fresco', 35.00, 'kg'),
-    ('[DEMO] Macelleria Sarda', 'Salsiccia Sarda', 'Fresco', 14.50, 'kg')
+    ('[DEMO] Macelleria Sarda', 'Salsiccia Sarda', 'Fresco', 14.50, 'kg'),
+    ('[DEMO] Pulizie a Bordo Cagliari', 'Pulizia Completa Interni', 'Servizi', 150.00, 'servizio')
 ) as p(vendor_name, name, category, price, unit) ON p.vendor_name = v.name;
+
+-- 8. Inserimento Barche DEMO (Per popolare la home a visitatori non loggati)
+INSERT INTO public.boats (name, boat_type, length, width, draft, passengers_capacity)
+VALUES 
+  ('[DEMO] Gommone Sole', 'Gommone', 7.50, 2.50, 0.80, 6),
+  ('[DEMO] Barca a Vela Vento', 'Vela', 12.00, 3.80, 2.10, 8),
+  ('[DEMO] Catamarano Spazio', 'Catamarano', 14.50, 7.50, 1.30, 10),
+  ('[DEMO] Motoryacht Veloce', 'Motore', 18.00, 4.80, 1.50, 12),
+  ('[DEMO] Superyacht Lusso', 'Motore', 24.00, 6.00, 2.00, 14);

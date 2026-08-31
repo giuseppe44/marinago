@@ -1,5 +1,6 @@
 import { HeroSearch } from "@/components/home/HeroSearch";
 import { Pillars } from "@/components/home/Pillars";
+import { FeaturedDestinations } from "@/components/home/FeaturedDestinations";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
@@ -12,10 +13,16 @@ export default async function Home() {
     ? { status: "error", message: error.message }
     : { status: "success", count: marinas?.length || 0 };
 
-  // Recupero barche dell'utente
+  // Recupero barche dell'utente o barche DEMO
   let userBoats: any[] = [];
   if (user) {
     const { data } = await supabase.from("boats").select("*").eq("owner_id", user.id);
+    if (data) userBoats = data;
+  }
+  
+  // Se non ci sono barche (utente non loggato o senza barche), carica quelle DEMO per la UX
+  if (userBoats.length === 0) {
+    const { data } = await supabase.from("boats").select("*").like("name", "[DEMO]%").limit(5);
     if (data) userBoats = data;
   }
 
@@ -52,6 +59,9 @@ export default async function Home() {
 
       {/* 4 Pillars Section */}
       <Pillars />
+
+      {/* Featured Destinations */}
+      <FeaturedDestinations />
       
     </main>
   );

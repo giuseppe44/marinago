@@ -63,23 +63,29 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
           {searchTab === "ormeggio" ? (
             <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Dove vuoi andare?</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">Dove vuoi andare?</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input type="text" name="destination" placeholder="Località, porto, area..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="marinas-list" type="text" name="destination" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <datalist id="marinas-list">
+                    <option value="Porto Cervo" />
+                    <option value="Cagliari" />
+                    <option value="Villasimius" />
+                    <option value="Olbia" />
+                  </datalist>
                 </div>
               </div>
               
               <div className="flex-1 flex gap-4">
                 <div className="w-1/2">
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Arrivo</label>
+                  <label className="block text-sm font-bold text-slate-900 mb-2">Arrivo</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <input type="date" name="start" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                   </div>
                 </div>
                 <div className="w-1/2">
-                  <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Partenza</label>
+                  <label className="block text-sm font-bold text-slate-900 mb-2">Partenza</label>
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <input type="date" name="end" required className="w-full pl-10 pr-2 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
@@ -88,13 +94,13 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
               </div>
 
               <div className="flex-1">
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">La tua barca</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">La tua barca</label>
                 <div className="relative">
                   <Anchor className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                   <select name="boat" required className="w-full pl-10 pr-8 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
-                    <option value="">Seleziona...</option>
+                    <option value="">Seleziona imbarcazione...</option>
                     {boats.map(boat => (
-                      <option key={boat.id} value={boat.id}>{boat.name} ({boat.length}m)</option>
+                      <option key={boat.id} value={boat.id}>{boat.name} ({boat.length}m {boat.boat_type || ''})</option>
                     ))}
                     {boats.length === 0 && <option value="" disabled>Nessuna barca salvata</option>}
                   </select>
@@ -104,24 +110,31 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
               <div className="md:w-32 flex items-end">
                 <button type="submit" className="w-full h-[50px] bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors">
                   <Search className="h-5 w-5" />
-                  <span className="md:hidden">Cerca Ormeggio</span>
+                  <span className="md:hidden">Cerca</span>
                 </button>
               </div>
             </form>
           ) : (
             <div className="flex flex-col md:flex-row gap-4 items-end">
                <div className="flex-1 w-full">
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Consegna a bordo in porto</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">Consegna a bordo in porto</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input type="text" placeholder="Seleziona il porto di consegna..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="marinas-list" type="text" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
                 </div>
               </div>
               <div className="flex-1 w-full">
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Cosa ti serve?</label>
+                <label className="block text-sm font-bold text-slate-900 mb-2">Cosa ti serve?</label>
                 <div className="relative">
                   <ShoppingBasket className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                  <input type="text" placeholder="Es. Vino, ghiaccio, carne..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <input list="services-list" type="text" placeholder="Es. Vino, Pulizie, Meccanico..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
+                  <datalist id="services-list">
+                    <option value="Vino e Alcolici" />
+                    <option value="Spesa Fresca (Carne/Pesce)" />
+                    <option value="Pulizia Interna Barca" />
+                    <option value="Assistenza Meccanico" />
+                    <option value="Transfer Aeroporto" />
+                  </datalist>
                 </div>
               </div>
               <div className="md:w-32 w-full">
