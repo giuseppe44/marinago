@@ -12,12 +12,20 @@ export default async function GestoreLayout({ children }: { children: React.Reac
   }
 
   // Verifica che l'utente sia un Marina Manager (o Admin)
-  // Per il DEMO/MVP, accettiamo l'utente e controlliamo se è associato a una marina
-  const { data: staffRecord } = await supabase
+  let { data: staffRecord } = await supabase
     .from("marina_staff")
     .select("marina_id, marinas(name)")
     .eq("user_id", user.id)
     .single();
+
+  // AUTO-FIX PER DEMO: Se l'admin non ha un porto associato, glielo assegniamo noi forzatamente.
+  if (!staffRecord) {
+    const { data: demoMarina } = await supabase.from("marinas").select("id, name").ilike("name", "%Cervo%").limit(1).single();
+    if (demoMarina) {
+      await supabase.from("marina_staff").insert({ marina_id: demoMarina.id, user_id: user.id });
+      staffRecord = { marina_id: demoMarina.id, marinas: { name: demoMarina.name } } as any;
+    }
+  }
 
   const marinaName = (staffRecord?.marinas as any)?.name || "Nessuna Marina Associata";
 

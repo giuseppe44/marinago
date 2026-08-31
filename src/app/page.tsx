@@ -24,10 +24,10 @@ export default async function Home() {
     <main className="min-h-screen bg-slate-50 flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[65vh] min-h-[550px] w-full flex flex-col items-center justify-center">
-        {/* L'immagine di sfondo: Barca a vela classica/vintage in mare */}
+        {/* L'immagine di sfondo: Barca a vela luminosa diurna in mare */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2070&auto=format&fit=crop")' }}
+          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1505322022379-7c3353ee6291?q=80&w=2070&auto=format&fit=crop")' }}
         />
         {/* Overlay scuro per far leggere bene il testo bianco */}
         <div className="absolute inset-0 z-0 bg-slate-900/60" />

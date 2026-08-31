@@ -1,0 +1,1 @@
+﻿export default function Page() { return <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200"><h2 className="text-xl font-bold mb-4 text-slate-800">Modulo in Arrivo</h2><p className="text-slate-500">Questa sezione sara disponibile nella prossima release dell MVP.</p></div> }
