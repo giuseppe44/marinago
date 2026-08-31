@@ -23,12 +23,14 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[65vh] min-h-[550px] w-full bg-slate-900 flex flex-col items-center justify-center">
-        <div className="absolute inset-0 bg-slate-900/60 z-0" />
+      <section className="relative h-[65vh] min-h-[550px] w-full flex flex-col items-center justify-center">
+        {/* L'immagine di sfondo: Barca a vela classica/vintage in mare */}
         <div 
-          className="absolute inset-0 z-0 opacity-70 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1569263979104-865ab7cdf0d5?q=80&w=2070&auto=format&fit=crop")' }}
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2070&auto=format&fit=crop")' }}
         />
+        {/* Overlay scuro per far leggere bene il testo bianco */}
+        <div className="absolute inset-0 z-0 bg-slate-900/60" />
         
         {/* Dynamic LIVE element */}
         <div className="relative z-10 mb-8 inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
