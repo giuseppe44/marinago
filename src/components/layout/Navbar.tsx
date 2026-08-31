@@ -9,9 +9,11 @@ export async function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center px-4 justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <Ship className="h-6 w-6 text-blue-600" />
-          <span className="text-xl font-bold text-slate-900 tracking-tight">MARINAGO</span>
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="flex items-center justify-center w-8 h-8 bg-slate-900 rounded-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <span className="text-xl text-slate-900 tracking-[0.2em]"><span className="font-bold">MARINA</span><span className="font-light">GO</span></span>
         </Link>
         
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">

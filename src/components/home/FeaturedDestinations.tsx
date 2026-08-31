@@ -5,7 +5,7 @@ export function FeaturedDestinations() {
   const destinations = [
     {
       name: "Porto Cervo",
-      image: "https://images.unsplash.com/photo-1566861298642-831e5f3afcb5?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2070&auto=format&fit=crop",
       desc: "Il cuore della Costa Smeralda, esclusivo e raffinato.",
     },
     {

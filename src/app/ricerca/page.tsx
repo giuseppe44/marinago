@@ -108,7 +108,20 @@ export default async function RicercaPage({
               </div>
             ))}
 
-            {results.length === 0 && !errorMsg && (
+            {results.length === 0 && !errorMsg && (!start || !end || !boat) ? (
+              <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+                <Navigation className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold text-slate-700 mb-1">Completa la ricerca</h3>
+                <p className="text-slate-500 text-sm max-w-md mx-auto mb-6">
+                  {dest 
+                    ? `Stai cercando ormeggi a ${dest}. Inserisci le date di arrivo e partenza e seleziona la tua barca per verificare le disponibilità in tempo reale.`
+                    : 'Inserisci la destinazione, le date e la tua barca per trovare l\'ormeggio perfetto.'}
+                </p>
+                <Link href="/" className="inline-flex items-center justify-center h-10 px-6 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors">
+                  Torna alla Home
+                </Link>
+              </div>
+            ) : results.length === 0 && !errorMsg && (
               <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
                 <Navigation className="h-12 w-12 text-slate-300 mx-auto mb-3" />
                 <h3 className="text-lg font-semibold text-slate-700 mb-1">Nessun ormeggio trovato</h3>

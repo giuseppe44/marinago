@@ -42,8 +42,8 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto -mt-16 sm:-mt-24 relative z-10 px-4">
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100">
+    <div className="w-full max-w-4xl mx-auto -mt-16 sm:-mt-24 relative z-50 px-4">
+      <div className="bg-white rounded-2xl shadow-2xl border border-slate-100">
         
         {/* Tabs */}
         <div className="flex border-b border-slate-100">
