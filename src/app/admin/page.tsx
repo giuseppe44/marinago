@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { TrendingUp, Users, Anchor, CheckCircle, CalendarDays, Ship } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminPage() {
   const supabase = await createClient();
 

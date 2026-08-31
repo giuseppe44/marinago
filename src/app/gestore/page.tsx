@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { Ship, Anchor, BookOpen, AlertCircle, CalendarDays } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function GestoreDashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
