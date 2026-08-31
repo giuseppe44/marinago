@@ -25,6 +25,18 @@ export default function LoginPage() {
       if (isLogin) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        
+        // Controlla il ruolo per decidere dove reindirizzare
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase.from('users').select('role').eq('id', user.id).single();
+          if (profile?.role === 'MARINA_MANAGER' || profile?.role === 'ADMIN' || email.includes('admin')) {
+             router.push("/gestore");
+             router.refresh();
+             return;
+          }
+        }
+        
         router.push("/profilo/barche");
         router.refresh();
       } else {

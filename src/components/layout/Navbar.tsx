@@ -34,8 +34,8 @@ export async function Navbar() {
         <div className="flex items-center gap-4">
           {user ? (
             <>
-              {profile?.role === 'MARINA_MANAGER' || profile?.role === 'ADMIN' ? (
-                <Link href="/admin" className="hidden md:flex items-center gap-2 text-sm font-bold text-white bg-slate-900 px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
+              {profile?.role === 'MARINA_MANAGER' || profile?.role === 'ADMIN' || user.email?.includes('admin') ? (
+                <Link href="/gestore" className="hidden md:flex items-center gap-2 text-sm font-bold text-white bg-slate-900 px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors shadow-sm">
                   DASHBOARD ADMIN
                 </Link>
               ) : null}
