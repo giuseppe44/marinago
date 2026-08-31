@@ -41,7 +41,7 @@ export default async function Home() {
         <div className="absolute inset-0 bg-blue-900/40 z-0" />
         <div 
           className="absolute inset-0 z-0 opacity-60 bg-cover bg-center"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2070&auto=format&fit=crop")' }}
+          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1533228876403-518fa10066ba?q=80&w=2070&auto=format&fit=crop")' }}
         />
         
         <div className="relative z-10 text-center px-4 w-full">
