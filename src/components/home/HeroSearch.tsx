@@ -67,12 +67,6 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                   <input list="marinas-list" type="text" name="destination" placeholder="Es. Porto Cervo, Cagliari..." className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow" />
-                  <datalist id="marinas-list">
-                    <option value="Porto Cervo" />
-                    <option value="Cagliari" />
-                    <option value="Porto Rotondo" />
-                    <option value="Olbia" />
-                  </datalist>
                 </div>
               </div>
               
@@ -146,6 +140,14 @@ export function HeroSearch({ boats = [] }: { boats?: any[] }) {
             </div>
           )}
         </div>
+        
+        {/* Global Datalists for both tabs */}
+        <datalist id="marinas-list">
+          <option value="Porto Cervo" />
+          <option value="Cagliari" />
+          <option value="Porto Rotondo" />
+          <option value="Olbia" />
+        </datalist>
       </div>
     </div>
   );

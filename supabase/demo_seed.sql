@@ -105,3 +105,7 @@ VALUES
   ('[DEMO] Catamarano Spazio', 'Catamarano', 14.50, 7.50, 1.30, 10),
   ('[DEMO] Motoryacht Veloce', 'Motore', 18.00, 4.80, 1.50, 12),
   ('[DEMO] Superyacht Lusso', 'Motore', 24.00, 6.00, 2.00, 14);
+
+-- 9. Creazione Policy RLS per permettere ai visitatori NON loggati di leggere le barche DEMO
+DROP POLICY IF EXISTS "Lettura pubblica per DEMO boats" ON public.boats;
+CREATE POLICY "Lettura pubblica per DEMO boats" ON public.boats FOR SELECT USING (name LIKE '[DEMO]%');
